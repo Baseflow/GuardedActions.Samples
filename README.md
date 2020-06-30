@@ -1,8 +1,8 @@
-# GuardedActions
+# GuardedActions Samples
 
-This repository contains sample code which demonstrates how to implement the GuardedActions in combination with different IoC containers.
+This repository contains sample code which demonstrates how to implement the [GuardedActions](https://github.com/Baseflow/GuardedActions) in combination with different IoC containers.
 
- - [.NET Core](#net-core)
+ - [.NET Core](#net-core-xamarinforms-example)
  - [MvvmCross](#mvvmcross)
 
 :construction: The rest is to coming soon! :construction:
