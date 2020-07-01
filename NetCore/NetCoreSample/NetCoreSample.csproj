@@ -11,10 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.5" />
-    <PackageReference Include="GuardedActions.NetCore" Version="1.1.0" />
+    <PackageReference Include="GuardedActions.NetCore" Version="1.1.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
   </ItemGroup>
   
   <ItemGroup>
@@ -27,5 +28,9 @@
     
   <ItemGroup>
     <ProjectReference Include="..\NetCoreSample.Core\NetCoreSample.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

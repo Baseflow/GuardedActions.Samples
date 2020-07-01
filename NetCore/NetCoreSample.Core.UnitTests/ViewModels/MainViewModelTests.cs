@@ -36,7 +36,7 @@ namespace NetCoreSample.Core.UnitTests.ViewModels
             viewModel.PropertyChanged += (sender, args) => lastChangedPropertyName = args.PropertyName;
 
             // Act
-            viewModel.Downloads = new ObservableCollection<Download>();
+            viewModel.Downloads = new ObservableCollection<DownloadableUrl>();
 
             // Assert
             Assert.Equal(nameof(viewModel.Downloads), lastChangedPropertyName);

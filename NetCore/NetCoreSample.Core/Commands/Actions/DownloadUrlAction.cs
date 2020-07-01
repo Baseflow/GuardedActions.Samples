@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GuardedActions.Commands.Actions;
 using NetCoreSample.Core.Commands.Actions.Contracts;
+using NetCoreSample.Core.Enums;
 using NetCoreSample.Core.Models;
 
 namespace NetCoreSample.Core.Commands.Actions
 {
-    public class DownloadUrlAction : GuardedDataContextAction<Download>, IDownloadUrlAction
+    public class DownloadUrlAction : GuardedDataContextAction<DownloadableUrl>, IDownloadUrlAction
     {
-        protected override Task Execute()
+        protected override async Task Execute()
         {
-            var correctUrl = Uri.TryCreate(DataContext.Url, UriKind.Absolute, out var result);
+            DataContext.State = DownloadableUrlState.Downloading;
 
-            if (!correctUrl)
-                throw new WebException("Manually triggered");
+            var url = new Uri(DataContext.Url, UriKind.Absolute);
 
-            DataContext.IsDownloaded = true;
+            using var client = new HttpClient();
 
-            return Task.CompletedTask;
+            DataContext.Data = await client.GetByteArrayAsync(url);
         }
     }
 }

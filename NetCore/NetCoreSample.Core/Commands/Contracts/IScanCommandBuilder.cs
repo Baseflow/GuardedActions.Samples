@@ -3,7 +3,7 @@ using NetCoreSample.Core.Models;
 
 namespace NetCoreSample.Core.Commands.Contracts
 {
-    public interface IDownloadCommandBuilder : IAsyncGuardedDataContextCommandBuilder<DownloadableUrl>
+    public interface IScanCommandBuilder : IAsyncGuardedDataContextCommandBuilder<NotifyPropertyChanged>
     {
     }
 }

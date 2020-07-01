@@ -5,6 +5,6 @@ namespace NetCoreSample.Core.Factories.Contracts
 {
     public interface IDownloadFactory
     {
-        Download Create(string url);
+        DownloadableUrl Create(string url);
     }
 }

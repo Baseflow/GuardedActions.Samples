@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using GuardedActions.Commands;
 using NetCoreSample.Core.Commands.Contracts;
@@ -10,12 +10,7 @@ namespace NetCoreSample.Core.Commands
     {
         protected override Task ExecuteCommandAction()
         {
-            var commands = new List<Task>();
-            foreach (var download in DataContext.Downloads)
-            {
-                commands.Add(download.DownloadCommand.ExecuteAsync());
-            }
-            return Task.WhenAll(commands.ToArray());
+            throw new NotImplementedException("The download all feature has not been implemented.. yet!");
         }
     }
 }

@@ -3,7 +3,7 @@ using NetCoreSample.Core.Models;
 
 namespace NetCoreSample.Core.Commands.Actions.Contracts
 {
-    public interface IDownloadUrlAction : IGuardedDataContextAction<DownloadableUrl>
+    public interface ISaveDownloadAction : IGuardedDataContextAction<DownloadableUrl>
     {
     }
 }

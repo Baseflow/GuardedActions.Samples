@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using GuardedActions.Commands;
 using GuardedActions.Commands.Contracts;
@@ -8,27 +9,39 @@ using NetCoreSample.Core.Models;
 
 namespace NetCoreSample.Core.Commands
 {
-    public class DownloadCommandBuilder : AsyncGuardedDataContextCommandBuilder<Download>, IDownloadCommandBuilder
+    // In this example it's taken to the extreme and created some micro actions for demo purpose.
+    public class DownloadCommandBuilder : AsyncGuardedDataContextCommandBuilder<DownloadableUrl>, IDownloadCommandBuilder
     {
+        // In this example it's taken to the extreme and created some micro actions for demo purpose.
         private readonly IDownloadUrlAction _downloadUrlAction;
+        private readonly IDetermineDownloadFilenameAction _determineDownloadFilenameAction;
+        private readonly ISaveDownloadAction _saveDownloadAction;
 
-        public DownloadCommandBuilder(IDownloadUrlAction downloadUrlAction)
+        // In this example it's taken to the extreme and created some micro actions for demo purpose.
+        public DownloadCommandBuilder(
+            IDownloadUrlAction downloadUrlAction,
+            IDetermineDownloadFilenameAction determineDownloadFilenameAction,
+            ISaveDownloadAction saveDownloadAction)
         {
             _downloadUrlAction = downloadUrlAction ?? throw new ArgumentNullException(nameof(downloadUrlAction));
+            _determineDownloadFilenameAction = determineDownloadFilenameAction ?? throw new ArgumentNullException(nameof(determineDownloadFilenameAction));
+            _saveDownloadAction = saveDownloadAction ?? throw new ArgumentNullException(nameof(downloadUrlAction));
         }
 
-        protected override Task ExecuteCommandAction()
+        // In this example it's taken to the extreme and created some micro actions for demo purpose.
+        protected override async Task ExecuteCommandAction()
         {
-            _downloadUrlAction.ExecuteGuarded();
-
-            // And more actions to handle the download
-
-            return Task.CompletedTask;
+            await _downloadUrlAction.ExecuteGuarded();
+            await _determineDownloadFilenameAction.ExecuteGuarded();
+            await _saveDownloadAction.ExecuteGuarded();
         }
 
-        public override IAsyncGuardedDataContextCommandBuilder<Download> RegisterDataContext(Download dataContext)
+        // In this example it's taken to the extreme and created some micro actions for demo purpose.
+        public override IAsyncGuardedDataContextCommandBuilder<DownloadableUrl> RegisterDataContext(DownloadableUrl dataContext)
         {
             _downloadUrlAction.RegisterDataContext(dataContext);
+            _determineDownloadFilenameAction.RegisterDataContext(dataContext);
+            _saveDownloadAction.RegisterDataContext(dataContext);
 
             return base.RegisterDataContext(dataContext);
         }

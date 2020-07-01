@@ -21,7 +21,7 @@ namespace NetCoreSample.Core.Commands.Actions
 
         protected override Task Execute()
         {
-            DataContext.Downloads = new ObservableCollection<Download>
+            DataContext.Downloads = new ObservableCollection<DownloadableUrl>
             {
                 _downloadFactory.Create("https://www.google.com/"),
                 _downloadFactory.Create("https://www.facebook.com/"),

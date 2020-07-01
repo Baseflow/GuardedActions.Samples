@@ -10,7 +10,7 @@ namespace NetCoreSample.Core.ViewModels
     {
         private string _errorMessage;
 
-        private ObservableCollection<Download> _downloads;
+        private ObservableCollection<DownloadableUrl> _downloads;
 
         private readonly IInitializeCommandBuilder _initializeCommandBuilder;
         private readonly IDownloadAllCommandBuilder _downloadAllCommandBuilder;
@@ -35,7 +35,7 @@ namespace NetCoreSample.Core.ViewModels
             set => SetProperty(ref _errorMessage, value, () => RaisePropertyChanged(nameof(ShowErrorMessage)));
         }
 
-        public ObservableCollection<Download> Downloads
+        public ObservableCollection<DownloadableUrl> Downloads
         {
             get => _downloads;
             set => SetProperty(ref _downloads, value);

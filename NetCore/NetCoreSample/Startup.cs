@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xamarin.Essentials;
+using NetCoreSample.Core.Services.Contracts;
+using NetCoreSample.Services;
+using Acr.UserDialogs;
 
 namespace NetCoreSample
 {
@@ -50,6 +53,7 @@ namespace NetCoreSample
         {
             ConfigureViewModels(serviceCollection);
             ConfigureFactories(serviceCollection);
+            ConfigureServices(serviceCollection);
         }
 
         private static void ConfigureViewModels(IServiceCollection serviceCollection)
@@ -63,6 +67,13 @@ namespace NetCoreSample
         private static void ConfigureFactories(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IDownloadFactory, DownloadFactory>();
+        }
+
+        private static void ConfigureServices(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddSingleton((_) => UserDialogs.Instance);
+            serviceCollection.AddSingleton<IDialogService, DialogService>();
+            serviceCollection.AddSingleton<IFileService, FileService>();
         }
     }
 }

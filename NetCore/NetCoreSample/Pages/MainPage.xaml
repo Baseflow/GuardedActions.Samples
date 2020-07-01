@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:enums="clr-namespace:NetCoreSample.Core.Enums;assembly=NetCoreSample.Core"
     ios:Page.UseSafeArea="true"
     x:Class="NetCoreSample.Pages.MainPage"
     Title="Main">
@@ -17,14 +18,52 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="{Binding Url}" HorizontalOptions="FillAndExpand" />
-                        <Label Grid.Column="1" Text="X" TextColor="Red" IsVisible="{Binding HasError}" />
+                        <Button Grid.Column="1" Text="Download" Command="{Binding DownloadCommand}" IsVisible="False">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    TargetType="Button"
+                                    Binding="{Binding State}"
+                                    Value="{x:Static enums:DownloadableUrlState.Default}">
+                                    <Setter Property="IsVisible" Value="True" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Label Grid.Row="1" Grid.ColumnSpan="2">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding State}"
+                                    Value="{x:Static enums:DownloadableUrlState.Downloading}">
+                                    <Setter Property="Text" Value="Downloading..." />
+                                </DataTrigger>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding State}"
+                                    Value="{x:Static enums:DownloadableUrlState.Downloaded}">
+                                    <Setter Property="Text" Value="Downloaded" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding State}"
+                                    Value="{x:Static enums:DownloadableUrlState.Saved}">
+                                    <Setter Property="Text" Value="{Binding Filename, StringFormat='Saved as \'{0}\''}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding State}"
+                                    Value="{x:Static enums:DownloadableUrlState.Error}">
+                                    <Setter Property="TextColor" Value="Red" />
+                                    <Setter Property="Text" Value="{Binding ErrorMessage}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </Grid>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>
-
         <Button Text="Download all" Command="{Binding DownloadAllCommand}" />
     </StackLayout>
 </ContentPage>

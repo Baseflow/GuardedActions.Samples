@@ -3,25 +3,33 @@ using System.Threading.Tasks;
 using GuardedActions.ExceptionHandlers;
 using GuardedActions.ExceptionHandlers.Attributes;
 using GuardedActions.ExceptionHandlers.Contracts;
+using GuardedActions.IoC;
+using NetCoreSample.Core.Services.Contracts;
 
 namespace NetCoreSample.Core.ExceptionHandlers.Defaults
 {
-    //TODO Think of a good implementation.
     [DefaultExceptionHandler]
     public class NotImplementedExceptionHandler : ExceptionHandler<NotImplementedException>
     {
-        //private readonly IUserDialogs _userDialogs;
+        private IDialogService _dialogService;
 
-        //public NotImplementedExceptionHandler(IUserDialogs userDialogs)
-        public NotImplementedExceptionHandler()
-        {
-            //_userDialogs = userDialogs;
-        }
+        // TODO: add ability to load use DI
+        //public NotImplementedExceptionHandler(IDialogService dialogService)
+        //{
+        //    _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+        //}
+
+        protected IDialogService DialogService => _dialogService ??= IoCRegistration.Instance.GetService<IDialogService>();
 
         public override Task Handle(IExceptionHandlingAction<NotImplementedException> exceptionHandlingAction)
         {
-            //await _userDialogs.AlertAsync("This is not implemented... yet.", "Coming soon™", "Ok, I will wait");
-            return Task.CompletedTask;
+            if (exceptionHandlingAction == null) throw new ArgumentNullException(nameof(exceptionHandlingAction));
+
+            exceptionHandlingAction.HandlingShouldFinish = true;
+
+            var message = exceptionHandlingAction?.Exception?.Message ?? "This is not implemented yet!";
+
+            return DialogService.Alert(message, "Coming soon™", "Ok, I will wait");
         }
     }
 }
