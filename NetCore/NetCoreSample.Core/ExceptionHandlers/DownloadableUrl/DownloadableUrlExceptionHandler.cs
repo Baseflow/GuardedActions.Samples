@@ -3,14 +3,13 @@ using System.Threading.Tasks;
 using GuardedActions.ExceptionHandlers;
 using GuardedActions.ExceptionHandlers.Attributes;
 using GuardedActions.ExceptionHandlers.Contracts;
-using NetCoreSample.Core.Models;
 
-namespace NetCoreSample.Core.Commands.Actions.ExceptionHandlers
+namespace NetCoreSample.Core.ExceptionHandlers.DownloadableUrl
 {
     [DefaultExceptionHandler]
-    public class DownloadExceptionHandler : ContextExceptionHandler<Exception, DownloadableUrl>
+    public class DownloadExceptionHandler : ContextExceptionHandler<Exception, Models.DownloadableUrl>
     {
-        public override Task Handle(IExceptionHandlingAction<Exception, DownloadableUrl> exceptionHandlingAction)
+        public override Task Handle(IExceptionHandlingAction<Exception, Models.DownloadableUrl> exceptionHandlingAction)
         {
             if (exceptionHandlingAction?.DataContext != null && exceptionHandlingAction.DataContext.ErrorMessage == null)
             {

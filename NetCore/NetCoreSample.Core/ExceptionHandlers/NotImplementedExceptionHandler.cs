@@ -6,7 +6,7 @@ using GuardedActions.ExceptionHandlers.Contracts;
 using GuardedActions.IoC;
 using NetCoreSample.Core.Services.Contracts;
 
-namespace NetCoreSample.Core.ExceptionHandlers.Defaults
+namespace NetCoreSample.Core.ExceptionHandlers
 {
     [DefaultExceptionHandler]
     public class NotImplementedExceptionHandler : ExceptionHandler<NotImplementedException>

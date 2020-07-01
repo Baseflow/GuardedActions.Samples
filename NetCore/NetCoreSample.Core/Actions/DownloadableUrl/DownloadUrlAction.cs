@@ -2,13 +2,12 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GuardedActions.Commands.Actions;
-using NetCoreSample.Core.Commands.Actions.Contracts;
+using NetCoreSample.Core.Actions.DownloadableUrl.Contracts;
 using NetCoreSample.Core.Enums;
-using NetCoreSample.Core.Models;
 
-namespace NetCoreSample.Core.Commands.Actions
+namespace NetCoreSample.Core.Actions.DownloadableUrl
 {
-    public class DownloadUrlAction : GuardedDataContextAction<DownloadableUrl>, IDownloadUrlAction
+    public class DownloadUrlAction : GuardedDataContextAction<Models.DownloadableUrl>, IDownloadUrlAction
     {
         protected override async Task Execute()
         {

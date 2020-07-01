@@ -2,14 +2,13 @@
 using System.IO;
 using System.Threading.Tasks;
 using GuardedActions.Commands.Actions;
-using NetCoreSample.Core.Commands.Actions.Contracts;
+using NetCoreSample.Core.Actions.DownloadableUrl.Contracts;
 using NetCoreSample.Core.Enums;
-using NetCoreSample.Core.Models;
 using NetCoreSample.Core.Services.Contracts;
 
-namespace NetCoreSample.Core.Commands.Actions
+namespace NetCoreSample.Core.Actions.DownloadableUrl
 {
-    public class DetermineDownloadFilenameAction : GuardedDataContextAction<DownloadableUrl>, IDetermineDownloadFilenameAction
+    public class DetermineDownloadFilenameAction : GuardedDataContextAction<Models.DownloadableUrl>, IDetermineDownloadFilenameAction
     {
         private readonly IDialogService _dialogService;
 

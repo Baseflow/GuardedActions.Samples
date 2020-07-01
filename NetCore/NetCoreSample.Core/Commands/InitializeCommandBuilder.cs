@@ -1,36 +1,34 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GuardedActions.Commands;
-using GuardedActions.Commands.Contracts;
-using NetCoreSample.Core.Commands.Actions.Contracts;
 using NetCoreSample.Core.Commands.Contracts;
+using NetCoreSample.Core.Factories.Contracts;
 using NetCoreSample.Core.ViewModels;
 
 namespace NetCoreSample.Core.Commands
 {
+    // This is an example of a CommandBuilder without actions
     public class InitializeCommandBuilder : AsyncGuardedDataContextCommandBuilder<MainViewModel>, IInitializeCommandBuilder
     {
-        private readonly IPullDownloadListAction _pullDownloadListAction;
+        private readonly IDownloadFactory _downloadFactory;
 
-        public InitializeCommandBuilder(IPullDownloadListAction pullDownloadListAction)
+        // This is an example of a CommandBuilder without actions
+        public InitializeCommandBuilder(IDownloadFactory downloadFactory)
         {
-            _pullDownloadListAction = pullDownloadListAction ?? throw new ArgumentNullException(nameof(pullDownloadListAction));
+            _downloadFactory = downloadFactory ?? throw new ArgumentNullException(nameof(downloadFactory));
         }
 
+        // This is an example of a CommandBuilder without actions
         protected override Task ExecuteCommandAction()
         {
-            _pullDownloadListAction.ExecuteGuarded();
-
-            // And more actions to initialize
-
+            DataContext.Downloads = new ObservableCollection<Models.DownloadableUrl>
+            {
+                _downloadFactory.Create("https://www.google.com/"),
+                _downloadFactory.Create("https://www.facebook.com/"),
+                _downloadFactory.Create("This is not an URL")
+            };
             return Task.CompletedTask;
-        }
-
-        public override IAsyncGuardedDataContextCommandBuilder<MainViewModel> RegisterDataContext(MainViewModel dataContext)
-        {
-            _pullDownloadListAction.RegisterDataContext(dataContext);
-
-            return base.RegisterDataContext(dataContext);
         }
     }
 }

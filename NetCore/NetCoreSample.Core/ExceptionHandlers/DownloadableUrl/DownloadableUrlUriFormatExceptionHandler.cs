@@ -3,16 +3,14 @@ using System.Threading.Tasks;
 using GuardedActions.ExceptionHandlers;
 using GuardedActions.ExceptionHandlers.Attributes;
 using GuardedActions.ExceptionHandlers.Contracts;
-using NetCoreSample.Core.Commands.Actions.Contracts;
-using NetCoreSample.Core.Commands.Contracts;
 using NetCoreSample.Core.Models;
 
-namespace NetCoreSample.Core.Commands.Actions.ExceptionHandlers
+namespace NetCoreSample.Core.Commands.Actions.DownloadableUrl
 {
-    [ExceptionHandlerFor(typeof(IDownloadUrlAction), typeof(IDownloadCommandBuilder))]
-    public class DownloadUrlActionUriFormatExceptionHandler : ContextExceptionHandler<UriFormatException, DownloadableUrl>
+    [DefaultExceptionHandler]
+    public class DownloadableUrlUriFormatExceptionHandler : ContextExceptionHandler<UriFormatException, Models.DownloadableUrl>
     {
-        public override Task Handle(IExceptionHandlingAction<UriFormatException, DownloadableUrl> exceptionHandlingAction)
+        public override Task Handle(IExceptionHandlingAction<UriFormatException, Models.DownloadableUrl> exceptionHandlingAction)
         {
             if (exceptionHandlingAction?.DataContext != null)
             {

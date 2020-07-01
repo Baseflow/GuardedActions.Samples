@@ -4,7 +4,7 @@ using GuardedActions.ExceptionHandlers;
 using GuardedActions.ExceptionHandlers.Attributes;
 using GuardedActions.ExceptionHandlers.Contracts;
 
-namespace NetCoreSample.Core.ExceptionHandlers.Defaults
+namespace NetCoreSample.Core.ExceptionHandlers
 {
     [DefaultExceptionHandler]
     public class TaskCanceledExceptionHandler : ExceptionHandler<TaskCanceledException>
