@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GuardedActions.Commands.Actions;
 using NetCoreSample.Core.Commands.Actions.Contracts;
@@ -20,7 +21,7 @@ namespace NetCoreSample.Core.Commands.Actions
 
         protected override Task Execute()
         {
-            DataContext.Downloads = new List<Download>
+            DataContext.Downloads = new ObservableCollection<Download>
             {
                 _downloadFactory.Create("https://www.google.com/"),
                 _downloadFactory.Create("https://www.facebook.com/"),

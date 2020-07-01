@@ -2,7 +2,7 @@
 
 namespace NetCoreSample.Core.ViewModels
 {
-    public class BaseViewModel : NotifyPropertyChanged
+    public abstract class BaseViewModel : NotifyPropertyChanged
     {
     }
 }

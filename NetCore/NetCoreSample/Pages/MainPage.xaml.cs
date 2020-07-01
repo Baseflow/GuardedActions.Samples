@@ -12,7 +12,11 @@ namespace NetCoreSample.Pages
         {
             InitializeComponent();
 
-            BindingContext = Startup.Services.GetService<MainViewModel>();
+            var viewModel = Startup.Services.GetService<MainViewModel>();
+
+            BindingContext = viewModel;
+
+            viewModel.InitializeCommand.Execute(null);
         }
     }
 }
